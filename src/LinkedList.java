@@ -3,6 +3,11 @@ import java.util.HashSet;
 public class LinkedList {
 
     private Node head;
+    private Node last;
+
+    public Node getLast() {
+        return last;
+    }
 
     public void setHead(Node head) {
         this.head = head;
@@ -23,6 +28,7 @@ public class LinkedList {
             }
             end.setNext(newNode);
         }
+        last = newNode;
     }
 
     public void deleteNode(int value) {

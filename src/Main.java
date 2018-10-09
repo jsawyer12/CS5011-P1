@@ -1,31 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
-
-    /**
-     * returns array of indexes of next node[s] to go to from current
-     * @param map
-     * @return
-     */
-    public static Integer[] getNextStepz(int[][] map, int current) {
-        ArrayList<Integer> nextStepz = new ArrayList<>();
-        for (int i = 0; i < map[current].length; i++) {
-            if (map[current][i] == 8) {
-                Integer[] ans = new Integer[] {i};
-                return ans;
-            }
-            if (map[current][i] == 5) {
-                nextStepz.add(i);
-            }
-        }
-        Integer[] ans = nextStepz.toArray(new Integer[nextStepz.size()]);
-        return ans;
-    }
-
-    public static LinkedList depthFirstSearch(LinkedList ll) {
-
-        return null;
-    }
 
     public static void printMap(int[][] map) {
         System.out.print(" ");
@@ -47,7 +23,11 @@ public class Main {
     public static void main(String[] args) {
 
         printMap(map1);
-        getNextStepz(map1, 3);
+        Part1 pt1 = new Part1(map1);
+        LinkedList path = new LinkedList();
+        Node startPos = new Node(3);
+        path.addNode(startPos);
+//        pt1.
     }
 
     public static char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};

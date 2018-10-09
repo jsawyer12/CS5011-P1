@@ -1,7 +1,7 @@
 public class Node {
 
     private Node next;
-    private char data;
+    private int data;
 
     public Node next() {
         return next;
@@ -11,15 +11,15 @@ public class Node {
         this.next = next;
     }
 
-    public void setData(char data) {
+    public void setData(int data) {
         this.data = data;
     }
 
-    public char data() {
+    public int data() {
         return data;
     }
 
-    public Node(char data) {
+    public Node(int data) {
         this.next = null;
         this.data = data;
 

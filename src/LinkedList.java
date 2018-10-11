@@ -1,12 +1,26 @@
-import java.util.HashSet;
+import java.util.Arrays;
 
 public class LinkedList {
 
     private Node head;
-    private Node last;
+    private Node tail;
+    private boolean[] usedNodes; // works like hashset, keeps track of used nodes so no repetition occurs
+    private char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};
 
-    public Node getLast() {
-        return last;
+
+
+    public boolean hasOccured(int nodeIndex) {
+        return usedNodes[nodeIndex];
+    }
+
+    public LinkedList(int nodeCount) {
+        head = null;
+        tail = null;
+        usedNodes = new boolean[nodeCount];
+    }
+
+    public Node getTail() {
+        return tail;
     }
 
     public void setHead(Node head) {
@@ -17,39 +31,36 @@ public class LinkedList {
         return head;
     }
 
-    public void addNode(Node newNode) {
-        if (head == null) {
-            head = newNode;
+    public void addNode(Node node) {
+        if (head != null) {
+            Node temp = tail;
+            tail.setNext(node);
+            tail = node;
+            tail.setPrev(temp);
         }
         else {
-            Node end = head;
-            while (end.next() != null) {
-                end = end.next();
-            }
-            end.setNext(newNode);
+            head = node;
+            tail = node;
         }
-        last = newNode;
+        usedNodes[node.data()] = true; // takes index of node, aka its data, aka its char, and sets that index to true
+//        System.out.println(Arrays.toString(usedNodes));
     }
 
-    public void deleteNode(int value) {
-        Node prev = head;
-        boolean nodeDeleted = false;
-        while (prev.next() != null && !nodeDeleted) {
-            if (prev.data() == value) {
-                if (prev == head) {
-                    if (head.next() != null)
-                        head = head.next();
-                    else
-                        head = null;
-                }
-                else {
-                    prev.setNext(prev.next().next());
-                    nodeDeleted = true;
-                }
+    public Node dropNode() {
+        if (head != null) {
+            Node temp = tail;
+            if (head == tail) {
+                head = null;
+                tail = null;
+                return temp;
             }
-            else
-                prev = prev.next();
+            else {
+                tail = tail.getPrev();
+                tail.setNext(null);
+                return temp;
+            }
         }
+        return null;
     }
 
     public boolean isEmpty() {
@@ -60,13 +71,11 @@ public class LinkedList {
 
     public void printList() {
         Node node = head;
-        int count = 0;
-        while (node != null && count > 15) {
-            System.out.print(node.data());
+        while (node != null) {
+            System.out.print(charSeq[node.data()]);
             if (node.next() != null)
                 System.out.print(" -> ");
             node = node.next();
-            count++;
         }
         System.out.println();
     }

@@ -24,10 +24,11 @@ public class Main {
 
         printMap(map1);
         Part1 pt1 = new Part1(map1);
-        LinkedList path = new LinkedList();
+        LinkedList path = new LinkedList(15); //nodeCount = 15 for a-o nodes
         Node startPos = new Node(3);
         path.addNode(startPos);
-//        pt1.
+        path = pt1.depthFirstSearch(path);
+        path.printList();
     }
 
     public static char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};

@@ -49,6 +49,7 @@ public class LinkedList {
     public Node dropNode() {
         if (head != null) {
             Node temp = tail;
+//            usedNodes[temp.data()] = false; // efficient without it, but may hurt other maps
             if (head == tail) {
                 head = null;
                 tail = null;

@@ -24,7 +24,7 @@ public class Main {
 
         printMap(map1);
         Part1 pt1 = new Part1(map1);
-        LinkedList path = new LinkedList(15); //nodeCount = 15 for a-o nodes
+        LinkedList path = new LinkedList(map1[0].length); //nodeCount = 15 for a-o nodes, consider moving into Part1
         Node startPos = new Node(3);
         path.addNode(startPos);
         path = pt1.depthFirstSearch(path);

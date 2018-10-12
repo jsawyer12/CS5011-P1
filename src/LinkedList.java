@@ -7,11 +7,26 @@ public class LinkedList {
     private boolean[] usedNodes; // works like hashset, keeps track of used nodes so no repetition occurs
     private char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};
 
-
+    private boolean[] getUsedNodes() {
+        return usedNodes;
+    }
 
     public boolean hasOccured(int nodeIndex) {
         return usedNodes[nodeIndex];
     }
+
+//    public LinkedList(LinkedList otherLL) {
+//        Node headNode = new Node(otherLL.getHead().data());
+//        head = headNode;
+//        Node temp = otherLL.getHead();
+//        while (temp.next() != null) {
+//            Node newNode = new Node(temp.data());
+//            temp = temp.next();
+//        }
+//        Node tailNode = new Node(otherLL.getTail().data());
+//        tail = tailNode;
+//        usedNodes = otherLL.getUsedNodes();
+//    }
 
     public LinkedList(int nodeCount) {
         head = null;

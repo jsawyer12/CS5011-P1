@@ -27,7 +27,12 @@ public class Main {
         LinkedList path = new LinkedList(map1[0].length); //nodeCount = 15 for a-o nodes, consider moving into Part1
         Node startPos = new Node(3);
         path.addNode(startPos);
-        path = pt1.depthFirstSearch(path);
+//        path = pt1.depthFirstSearch(path);
+//        path.printList();
+
+        ArrayList<LinkedList> paths = new ArrayList<>();
+        paths.add(path);
+        path = pt1.breadthFirstSearch(paths);
         path.printList();
     }
 

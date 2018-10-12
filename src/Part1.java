@@ -1,5 +1,3 @@
-import sun.awt.image.ImageWatched;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,8 +28,54 @@ public class Part1 {
         return ll;
     }
 
-    public LinkedList breadthFirstSearch(LinkedList ll) {
-        ll.printList();
-        return null; // CONTINUE HERE
+    public LinkedList breadthFirstSearch(ArrayList<LinkedList> paths) {
+        int currNumPaths = paths.size(); // so it doesn't keep adding while paths are added in one recursion
+        for (int i = 0; i < currNumPaths; i++) { // iterates through current set of paths
+//            System.out.print("Path " +i +": ");
+//            paths.get(i).printList();
+            int current = paths.get(i).getTail().data();
+            if (map[current][current] == 8) {
+                return paths.get(i);
+            }
+            boolean pathUsed = false; // dictates whether to copy path or use current one
+//            System.out.println("Options: " + Arrays.toString(map[current]));
+            for (int j = 0; j < map[current].length; j++) { // for each next move option per path
+                if (map[current][j] == 5) { // if node is next to current node
+                    if (!paths.get(i).hasOccured(j)) { // if this node in this path hasn't been hit yet
+                        Node nextStep = new Node(j); // create new node of index
+                        System.out.println("Adding index " +j);
+                        if (pathUsed) {
+                            ArrayList<LinkedList> pathsCopy = new ArrayList<>(paths);
+                            LinkedList branchedPath = pathsCopy.get(i);
+                            System.out.print("LL being copied: ");
+                            branchedPath.printList();
+                            branchedPath.dropNode(); // since one was added from below
+                            System.out.print("LL after drop: ");
+                            branchedPath.printList();
+                            System.out.print("paths i after drop: ");
+                            paths.get(i).printList();
+                            branchedPath.addNode(nextStep);
+                            System.out.print("LL being added: ");
+                            branchedPath.printList();
+                            paths.add(branchedPath);
+                        }
+                        else {
+                            pathUsed = true;
+                            paths.get(i).addNode(nextStep);
+                        }
+                        for (int k = 0; k < paths.size(); k++) {
+                            System.out.print("Path " + k + ": ");
+                            paths.get(k).printList();
+                        }
+                    }
+                }
+            }
+//            System.out.println();
+        }
+
+        LinkedList ll = breadthFirstSearch(paths);
+        return ll; // CONTINUE HERE
     }
+
+
 }

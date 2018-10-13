@@ -7,7 +7,7 @@ public class Main {
 
         Maps mapSet = new Maps();
 
-        printMap(mapSet.getMap9());
+//        printMap(mapSet.getMap9());
 //        Part1 pt1 = new Part1(mapSet.getMap9());
 //
 //        if (pt1.isPossible()) { // checks if there are connections to endPoint, will add comprehensive one if time
@@ -23,10 +23,34 @@ public class Main {
 //            System.out.println("Not possible, no nodes connecting to end node.");
 //        }
 
-        int[] start = new int[] {1, 2};
-        int[] end = new int[] {-1, 2};
-        Part2 pt2 = new Part2(mapSet.getMap1());
-        System.out.println(pt2.getDistance(start, end));
+        Locations locSet = new Locations();
+
+        printWorld(locSet.getLoc1());
+
+        Part2 pt2 = new Part2(mapSet.getMap1(), locSet.getLoc1());
+
+        if (pt2.isPossible()) { // checks if there are connections to endPoint, will add comprehensive one if time
+            LinkedList path = pt2.startBFS();
+            path.printList();
+        }
+    }
+
+    public static void printWorld(int[][] loc) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                boolean charFound = false;
+                for (int k = 0; k < loc.length; k++) {
+//                    System.out.println(Arrays.toString(loc[k]));
+                    if (loc[k][0] == j && loc[k][1] == i) {
+                        System.out.print(" " +charSeq[k]);
+                        charFound = true;
+                    }
+                }
+                if (!charFound)
+                    System.out.print(" +");
+            }
+            System.out.println();
+        }
     }
 
     public static void printMap(int[][] map) {

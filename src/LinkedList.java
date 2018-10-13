@@ -15,18 +15,18 @@ public class LinkedList {
         return usedNodes[nodeIndex];
     }
 
-//    public LinkedList(LinkedList otherLL) {
-//        Node headNode = new Node(otherLL.getHead().data());
-//        head = headNode;
-//        Node temp = otherLL.getHead();
-//        while (temp.next() != null) {
-//            Node newNode = new Node(temp.data());
-//            temp = temp.next();
-//        }
-//        Node tailNode = new Node(otherLL.getTail().data());
-//        tail = tailNode;
-//        usedNodes = otherLL.getUsedNodes();
-//    }
+    public LinkedList(LinkedList otherLL, int nodeCount) {
+        usedNodes = new boolean[nodeCount]; // MAKE DYNAMIC
+        if (otherLL.getHead() != null) {
+            Node temp = otherLL.getHead();
+            while (temp != null) {
+                Node next = new Node(temp.data());
+                addNode(next);
+//                printList();
+                temp = temp.next();
+            }
+        }
+    }
 
     public LinkedList(int nodeCount) {
         head = null;
@@ -58,7 +58,6 @@ public class LinkedList {
             tail = node;
         }
         usedNodes[node.data()] = true; // takes index of node, aka its data, aka its char, and sets that index to true
-//        System.out.println(Arrays.toString(usedNodes));
     }
 
     public Node dropNode() {
@@ -86,13 +85,15 @@ public class LinkedList {
     }
 
     public void printList() {
-        Node node = head;
-        while (node != null) {
-            System.out.print(charSeq[node.data()]);
-            if (node.next() != null)
-                System.out.print(" -> ");
-            node = node.next();
+        if (head != null) {
+            Node node = head;
+            while (node != null) {
+                System.out.print(charSeq[node.data()]);
+                if (node.next() != null)
+                    System.out.print(" -> ");
+                node = node.next();
+            }
+            System.out.println();
         }
-        System.out.println();
     }
 }

@@ -58,11 +58,11 @@ public class Part2 {
         int current = ll.getTail().data();
         int[] nextMoves = getBestestMoves(current, ll);
         for (int i = 0; i < nextMoves.length; i++) {
-            Node newNode = new Node(nextMoves[i]);
-            ll.addNode(newNode);
             current = ll.getTail().data();
             if (map[current][current] == 8)
                 return ll;
+            Node newNode = new Node(nextMoves[i]);
+            ll.addNode(newNode);
             ll = bestFirstSearch(ll);
             current = ll.getTail().data();
         }

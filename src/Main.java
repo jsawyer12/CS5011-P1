@@ -31,6 +31,7 @@ public class Main {
 
         if (pt2.isPossible()) { // checks if there are connections to endPoint, will add comprehensive one if time
             LinkedList path = pt2.startBFS();
+            System.out.print("Best First Path: ");
             path.printList();
         }
     }

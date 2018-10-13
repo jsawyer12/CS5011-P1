@@ -10,7 +10,7 @@ public class Main {
         printMap(mapSet.getMap9());
         Part1 pt1 = new Part1(mapSet.getMap9());
 
-        if (pt1.isPossible()) {
+        if (pt1.isPossible()) { // checks if there are connections to endPoint, will add comprehensive one if time
             LinkedList path = pt1.startDFS();
             System.out.print("DFS Path: ");
             path.printList();

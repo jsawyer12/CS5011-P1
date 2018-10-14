@@ -9,8 +9,10 @@ public class Part2 {
     private int nodeCount;
 
     private LinkedList aSSPath; // A star search path
+    private int aSSCost;
 
     private LinkedList bFSPath; // best first search path
+    private int bFSCost;
 
     public Part2(int[][] map, int[][] loc) {
         this.map = map;
@@ -23,9 +25,11 @@ public class Part2 {
 
         bFSPath = new LinkedList(nodeCount);
         bFSPath.addNode(startPos);
+        bFSCost = 0;
 
         aSSPath = new LinkedList(nodeCount);
         aSSPath.addNode(startPos);
+        aSSCost = 0;
     }
 
     public boolean isPossible() {
@@ -54,7 +58,9 @@ public class Part2 {
     }
 
     private LinkedList aStarSearch(LinkedList ll) {
-//        ll.printList();
+        aSSCost++;
+        System.out.print("Step " +aSSCost +": ");
+        ll.printList();
         int current = ll.getTail().data();
         int[] nextMoves = getAStarMoves(current, ll);
         for (int i = 0; i < nextMoves.length; i++) {
@@ -63,7 +69,7 @@ public class Part2 {
                 return ll;
             Node newNode = new Node(nextMoves[i]);
             ll.addNode(newNode);
-            ll = bestFirstSearch(ll);
+            ll = aStarSearch(ll);
             current = ll.getTail().data();
         }
         if (map[current][current] != 8) {
@@ -122,7 +128,9 @@ public class Part2 {
     }
 
     private LinkedList bestFirstSearch(LinkedList ll) {
-//        ll.printList();
+        bFSCost++;
+        System.out.print("Step " +bFSCost +": ");
+        ll.printList();
         int current = ll.getTail().data();
         int[] nextMoves = getBestestMoves(current, ll);
         for (int i = 0; i < nextMoves.length; i++) {

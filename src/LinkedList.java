@@ -5,7 +5,7 @@ public class LinkedList {
     private Node head;
     private Node tail;
     private boolean[] usedNodes; // works like hashset, keeps track of used nodes so no repetition occurs
-    private char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'};
+    private char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'};
 
     private boolean[] getUsedNodes() {
         return usedNodes;

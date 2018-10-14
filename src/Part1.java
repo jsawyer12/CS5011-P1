@@ -98,7 +98,7 @@ public class Part1 {
     public LinkedList breadthFirstSearch(ArrayList<LinkedList> paths) {
         int currNumPaths = paths.size(); // so it doesn't keep adding while paths are added in one recursion
         bFSStep++;
-        System.out.println("Step: " +bFSStep);
+        System.out.println("Recursion: " +bFSStep);
         for (int i = 0; i < currNumPaths; i++) { // iterates through current set of paths
             int current = paths.get(i).getTail().data();
 //            boolean nextMove = false; // dictates whether to move a path option if there are no further moves in it
@@ -114,11 +114,13 @@ public class Part1 {
                             branchedPath.dropNode(); // since one was added from below
                             branchedPath.addNode(nextStep);
                             paths.add(branchedPath);
+                            System.out.print("Step " +bFSCost +": ");
                             branchedPath.printList();
                         }
                         else {
                             pathUsed = true;
                             paths.get(i).addNode(nextStep);
+                            System.out.print("Step " +bFSCost +": ");
                             paths.get(i).printList();
                         }
                     }

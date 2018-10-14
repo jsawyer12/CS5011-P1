@@ -7,8 +7,11 @@ public class Part1 {
     private int nodeCount;
 
     private LinkedList dFSPath;
+    private int dFSCost;
 
     private LinkedList bFSPath;
+    private int bFSCost;
+    private int bFSStep;
 
     public Part1(int[][] map) {
         this.map = map;
@@ -21,9 +24,20 @@ public class Part1 {
 
         dFSPath = new LinkedList(nodeCount);
         dFSPath.addNode(startPos);
+        dFSCost = 0;
 
         bFSPath = new LinkedList(nodeCount);
         bFSPath.addNode(startPos);
+        bFSCost = 0;
+        bFSStep = 0;
+    }
+
+    public int getdFSCost() {
+        return dFSCost;
+    }
+
+    public int getbFSCost() {
+        return bFSCost;
     }
 
     public boolean isPossible() {
@@ -51,15 +65,21 @@ public class Part1 {
     }
 
     private LinkedList depthFirstSearch(LinkedList ll) {
-//        ll.printList();
+        dFSCost++;
+        System.out.print("Step " +dFSCost +": ");
+        ll.printList();
         int current = ll.getTail().data();
+        if (map[current][current] == 8)
+            return ll;
         for (int i = 0; i < map[current].length; i++) {
             if (map[current][i] == 5) {
-                if (!ll.hasOccured(i)) {
+                if (!ll.hasOccurred(i)) {
                     Node newNode = new Node(i);
                     ll.addNode(newNode);
-                    ll = depthFirstSearch(ll);
+                    depthFirstSearch(ll);
                     current = ll.getTail().data();
+                    if (map[current][current] == 8)
+                        return ll;
                 }
             }
         }
@@ -77,24 +97,29 @@ public class Part1 {
 
     public LinkedList breadthFirstSearch(ArrayList<LinkedList> paths) {
         int currNumPaths = paths.size(); // so it doesn't keep adding while paths are added in one recursion
+        bFSStep++;
+        System.out.println("Step: " +bFSStep);
         for (int i = 0; i < currNumPaths; i++) { // iterates through current set of paths
             int current = paths.get(i).getTail().data();
-            boolean nextMove = false; // dictates whether to move a path option if there are no further moves in it
+//            boolean nextMove = false; // dictates whether to move a path option if there are no further moves in it
             boolean pathUsed = false; // dictates whether to copy path or use current one
             for (int j = 0; j < map[current].length; j++) { // for each next move option per path
                 if (map[current][j] == 5) { // if node is next to current node
-                    if (!paths.get(i).hasOccured(j)) { // if this node in this path hasn't been hit yet
-                        nextMove = true;
+                    if (!paths.get(i).hasOccurred(j)) { // if this node in this path hasn't been hit yet
+//                        nextMove = true;
+                        bFSCost++;
                         Node nextStep = new Node(j); // create new node of index
                         if (pathUsed) {
                             LinkedList branchedPath = new LinkedList(paths.get(i), nodeCount);
                             branchedPath.dropNode(); // since one was added from below
                             branchedPath.addNode(nextStep);
                             paths.add(branchedPath);
+                            branchedPath.printList();
                         }
                         else {
                             pathUsed = true;
                             paths.get(i).addNode(nextStep);
+                            paths.get(i).printList();
                         }
                     }
                 }
@@ -107,13 +132,8 @@ public class Part1 {
                 return paths.get(i);
             }
         }
-//        System.out.println();
-//        for (int k = 0; k < paths.size(); k++) {
-//            System.out.print("Path " + k + ": ");
-//            paths.get(k).printList();
-//        }
         LinkedList ll = breadthFirstSearch(paths);
-        return ll; // CONTINUE HERE
+        return ll;
     }
 
 

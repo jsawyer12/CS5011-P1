@@ -83,7 +83,7 @@ public class Part2 {
                 if (map[k][k] == 8) { // if goal is an option, return only that option
                     return new int[] {k};
                 }
-                if (!ll.hasOccured(k)) {
+                if (!ll.hasOccurred(k)) {
                     moveDists[k] = getDistance(loc[current], loc[k]) + getDistance(loc[k], loc[endInd]) + pathDist;
                     moveCount++;
                 }
@@ -149,7 +149,7 @@ public class Part2 {
                 if (map[k][k] == 8) {
                     return new int[] {k};
                 }
-                if (!ll.hasOccured(k)) {
+                if (!ll.hasOccurred(k)) {
                     moveDists[k] = getDistance(loc[k], loc[endInd]);
                     moveCount++;
                 }

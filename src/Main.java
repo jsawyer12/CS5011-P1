@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -16,11 +13,11 @@ public class Main {
 
         if (pt1.isPossible()) { // checks if there are connections to endPoint, will add comprehensive one if time
             LinkedList path = pt1.startDFS();
-            System.out.print("DFS Path: ");
+            System.out.print("DFS Cost: " +pt1.getdFSCost()  +", Path: ");
             path.printList();
 
             LinkedList path2 = pt1.startBFS();
-            System.out.print("BFS Path: ");
+            System.out.print("BFS Cost: " +pt1.getbFSCost() +", Path: ");
             path2.printList();
         }
         else {
@@ -28,20 +25,20 @@ public class Main {
         }
 
 
-//        locSet.printWorld(loc);
-//        Part2 pt2 = new Part2(map, loc);
-//
-//        if (pt2.isPossible()) { // checks if there are connections to endPoint, will add comprehensive one if time
-//            LinkedList path = pt2.startBFS();
-//            System.out.print("Best First Path: ");
-//            path.printList();
-//
-//            LinkedList path2 = pt2.startASS();
-//            System.out.print("A Star Path    : ");
-//            path2.printList();
-//        }
-//        else {
-//            System.out.println("Not possible, no nodes connecting to end node.");
-//        }
+        locSet.printWorld(loc);
+        Part2 pt2 = new Part2(map, loc);
+
+        if (pt2.isPossible()) { // checks if there are connections to endPoint, will add comprehensive one if time
+            LinkedList path = pt2.startBFS();
+            System.out.print("Best First Path: ");
+            path.printList();
+
+            LinkedList path2 = pt2.startASS();
+            System.out.print("A Star Path    : ");
+            path2.printList();
+        }
+        else {
+            System.out.println("Not possible, no nodes connecting to end node.");
+        }
     }
 }

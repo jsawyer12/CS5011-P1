@@ -11,7 +11,7 @@ public class LinkedList {
         return usedNodes;
     }
 
-    public boolean hasOccured(int nodeIndex) {
+    public boolean hasOccurred(int nodeIndex) {
         return usedNodes[nodeIndex];
     }
 

@@ -1,5 +1,32 @@
 public class Maps {
 
+    public char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'};
+
+
+    public void printMap(int[][] map) {
+        System.out.print(" ");
+        for (int i = 0; i < charSeq.length; i++) {
+            if (i < 11)
+                System.out.print(" ");
+            System.out.print(" " +i);
+        }
+        System.out.println();
+        System.out.print(" ");
+        for (int i = 0; i < charSeq.length; i++) {
+            System.out.print("  " +charSeq[i]);
+        }
+        System.out.println();
+        for (int i = 0; i < map[0].length; i++) {
+            System.out.print(charSeq[i] +" ");
+            for (int j = 0; j < map[0].length; j++) {
+                System.out.print(" " +map[i][j]);
+                if (map[i][j] < 10)
+                    System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+
     public int[][] getMap1() {
         return map1;
     }

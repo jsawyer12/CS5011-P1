@@ -1,5 +1,26 @@
 public class Locations {
 
+    public char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'};
+
+
+    public void printWorld(int[][] loc) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                boolean charFound = false;
+                for (int k = 0; k < loc.length; k++) {
+//                    System.out.println(Arrays.toString(loc[k]));
+                    if (loc[k][0] == j && loc[k][1] == i) {
+                        System.out.print(" " +charSeq[k]);
+                        charFound = true;
+                    }
+                }
+                if (!charFound)
+                    System.out.print(" +");
+            }
+            System.out.println();
+        }
+    }
+
     public int[][] getLoc1() {
         return loc1;
     }

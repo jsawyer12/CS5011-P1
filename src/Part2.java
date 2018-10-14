@@ -49,12 +49,80 @@ public class Part2 {
         }
     }
 
+    public LinkedList startASS() {
+        return aStarSearch(aSSPath);
+    }
+
+    private LinkedList aStarSearch(LinkedList ll) {
+//        ll.printList();
+        int current = ll.getTail().data();
+        int[] nextMoves = getAStarMoves(current, ll);
+        for (int i = 0; i < nextMoves.length; i++) {
+            current = ll.getTail().data();
+            if (map[current][current] == 8)
+                return ll;
+            Node newNode = new Node(nextMoves[i]);
+            ll.addNode(newNode);
+            ll = bestFirstSearch(ll);
+            current = ll.getTail().data();
+        }
+        if (map[current][current] != 8) {
+            ll.dropNode();
+        }
+        return ll;
+    }
+
+    private int[] getAStarMoves(int current, LinkedList ll) {
+        double[] moveDists = new double[map[0].length]; //index = node, value = dist
+        int moveCount = 0;
+        double pathDist = getPathDist(ll);
+        // get cost of path thusfar, add to dist to whatever node is being checked,
+        // and add dist from that node to end goal
+        for (int k = 0; k < map[current].length; k++) {
+            if (map[current][k] == 5) {
+                if (map[k][k] == 8) { // if goal is an option, return only that option
+                    return new int[] {k};
+                }
+                if (!ll.hasOccured(k)) {
+                    moveDists[k] = getDistance(loc[current], loc[k]) + getDistance(loc[k], loc[endInd]) + pathDist;
+                    moveCount++;
+                }
+            }
+        }
+        int[] nodeIndexPrioritizedOrder = new int[moveCount];
+        while (moveCount > 0) {
+            double max = 0;
+            int indexToAdd = 0;
+            for (int k = 0; k < moveDists.length; k++) {
+                if (moveDists[k] > max) {
+                    indexToAdd = k;
+                    max = moveDists[k];
+                }
+            }
+            nodeIndexPrioritizedOrder[moveCount-1] = indexToAdd;
+            moveDists[indexToAdd] = 0;
+            moveCount--;
+        }
+//        System.out.println("Bestest moves: " + Arrays.toString(nodeIndexPrioritizedOrder));
+        return nodeIndexPrioritizedOrder;
+    }
+
+    private double getPathDist(LinkedList ll) {
+        double distance = 0;
+        Node temp = ll.getHead();
+        while (temp.next() != null) {
+            distance += getDistance(loc[temp.data()], loc[temp.next().data()]);
+            temp = temp.next();
+        }
+        return distance;
+    }
+
     public LinkedList startBFS() {
         return bestFirstSearch(bFSPath);
     }
 
     private LinkedList bestFirstSearch(LinkedList ll) {
-        ll.printList();
+//        ll.printList();
         int current = ll.getTail().data();
         int[] nextMoves = getBestestMoves(current, ll);
         for (int i = 0; i < nextMoves.length; i++) {
@@ -72,7 +140,7 @@ public class Part2 {
         return ll;
     }
 
-    public int[] getBestestMoves(int current, LinkedList ll) { // OPTIMIZE
+    private int[] getBestestMoves(int current, LinkedList ll) { // OPTIMIZE
 
         double[] moveDists = new double[map[0].length]; //index = node, value = dist
         int moveCount = 0;
@@ -102,7 +170,7 @@ public class Part2 {
             moveDists[indexToAdd] = 0;
             moveCount--;
         }
-        System.out.println("Bestest moves: " + Arrays.toString(nodeIndexPrioritizedOrder));
+//        System.out.println("Bestest moves: " + Arrays.toString(nodeIndexPrioritizedOrder));
         return nodeIndexPrioritizedOrder;
     }
 

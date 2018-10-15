@@ -14,14 +14,14 @@ public class Maps {
 
     public void printMap(int[][] map) {
         System.out.print(" ");
-        for (int i = 0; i < charSeq.length; i++) {
+        for (int i = 0; i < map[0].length; i++) {
             if (i < 11)
                 System.out.print(" ");
             System.out.print(" " +i);
         }
         System.out.println();
         System.out.print(" ");
-        for (int i = 0; i < charSeq.length; i++) {
+        for (int i = 0; i < map[0].length; i++) {
             System.out.print("  " +charSeq[i]);
         }
         System.out.println();

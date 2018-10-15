@@ -1,28 +1,36 @@
-import java.util.Arrays;
-
 public class LinkedList {
 
+    /**
+     * stores the head and the tail of the linked list so that nodes could be
+     * added and removed in constant time.
+     */
     private Node head;
     private Node tail;
+
+    /**
+     * stores the nodes that were already visited to avoid looping.
+     */
     private boolean[] usedNodes; // works like hashset, keeps track of used nodes so no repetition occurs
     private char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'};
-
-    private boolean[] getUsedNodes() {
-        return usedNodes;
-    }
 
     public boolean hasOccurred(int nodeIndex) {
         return usedNodes[nodeIndex];
     }
 
+    /**
+     * makes a copy of the original linked list in the args.I realized
+     * that setting a new linked list to an existing one merely references the
+     * existing one so I created this method to create an actual copy.
+     * @param otherLL
+     * @param nodeCount
+     */
     public LinkedList(LinkedList otherLL, int nodeCount) {
-        usedNodes = new boolean[nodeCount]; // MAKE DYNAMIC
+        usedNodes = new boolean[nodeCount];
         if (otherLL.getHead() != null) {
             Node temp = otherLL.getHead();
             while (temp != null) {
                 Node next = new Node(temp.data());
                 addNode(next);
-//                printList();
                 temp = temp.next();
             }
         }
@@ -36,10 +44,6 @@ public class LinkedList {
 
     public Node getTail() {
         return tail;
-    }
-
-    public void setHead(Node head) {
-        this.head = head;
     }
 
     public Node getHead() {
@@ -63,7 +67,6 @@ public class LinkedList {
     public Node dropNode() {
         if (head != null) {
             Node temp = tail;
-//            usedNodes[temp.data()] = false; // efficient without it, but may hurt other maps
             if (head == tail) {
                 head = null;
                 tail = null;
@@ -76,12 +79,6 @@ public class LinkedList {
             }
         }
         return null;
-    }
-
-    public boolean isEmpty() {
-        if (head == null)
-            return true;
-        return false;
     }
 
     public void printList() {

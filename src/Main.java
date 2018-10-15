@@ -3,10 +3,11 @@ public class Main {
     public static void main(String[] args) {
 
         Maps mapSet = new Maps();
-        int[][] map = mapSet.getMap1();
+        int mapNumber = Integer.parseInt(args[0]) - 1;
+        int[][] map = mapSet.getMap(mapNumber);
 
         Locations locSet = new Locations();
-        int[][] loc = locSet.getLoc1();
+        int[][] loc = locSet.getLoc(mapNumber);
 
         mapSet.printMap(map);
         Part1 pt1 = new Part1(map);
@@ -30,11 +31,11 @@ public class Main {
 
         if (pt2.isPossible()) { // checks if there are connections to endPoint, will add comprehensive one if time
             LinkedList path = pt2.startBFS();
-            System.out.print("Best First Path: ");
+            System.out.print("Best First Cost: " +pt2.getbFSCost() +", Path: ");
             path.printList();
 
             LinkedList path2 = pt2.startASS();
-            System.out.print("A Star Path    : ");
+            System.out.print("A Star Cost    : " +pt2.getaSSCost() +", Path: ");
             path2.printList();
         }
         else {

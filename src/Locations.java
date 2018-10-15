@@ -2,13 +2,25 @@ public class Locations {
 
     public char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'};
 
+    /**
+     * I decided to move the maps and locs into separate classes and store them in
+     * 3D arrays so they could be chosen as an argument when running the jar files.
+     */
+    private int[][][] locs;
+
+    public Locations() {
+        locs = new int[][][] {loc1, loc2, loc3, loc4, loc5, loc6, loc7, loc8, loc9};
+    }
+
+    public int[][] getLoc(int ind) {
+        return locs[ind];
+    }
 
     public void printWorld(int[][] loc) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 boolean charFound = false;
                 for (int k = 0; k < loc.length; k++) {
-//                    System.out.println(Arrays.toString(loc[k]));
                     if (loc[k][0] == j && loc[k][1] == i) {
                         System.out.print(" " +charSeq[k]);
                         charFound = true;
@@ -19,42 +31,6 @@ public class Locations {
             }
             System.out.println();
         }
-    }
-
-    public int[][] getLoc1() {
-        return loc1;
-    }
-
-    public int[][] getLoc2() {
-        return loc2;
-    }
-
-    public int[][] getLoc3() {
-        return loc3;
-    }
-
-    public int[][] getLoc4() {
-        return loc4;
-    }
-
-    public int[][] getLoc5() {
-        return loc5;
-    }
-
-    public int[][] getLoc6() {
-        return loc6;
-    }
-
-    public int[][] getLoc7() {
-        return loc7;
-    }
-
-    public int[][] getLoc8() {
-        return loc8;
-    }
-
-    public int[][] getLoc9() {
-        return loc9;
     }
 
     private int[][] loc1 = new int [][] {

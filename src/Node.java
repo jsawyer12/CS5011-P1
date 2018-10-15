@@ -1,5 +1,8 @@
 public class Node {
 
+    /**
+     * prev Node used to dropNode in Linked List class with constant time
+     */
     private Node next;
     private Node prev;
     private int data;
@@ -18,10 +21,6 @@ public class Node {
 
     public Node getPrev() {
         return prev;
-    }
-
-    public void setData(int data) {
-        this.data = data;
     }
 
     public int data() {

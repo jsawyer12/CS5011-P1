@@ -2,6 +2,15 @@ public class Maps {
 
     public char[] charSeq = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p'};
 
+    private int[][][] maps;
+
+    public Maps() {
+        maps = new int[][][] {map1, map2, map3, map4, map5, map6, map7, map8, map9};
+    }
+
+    public int[][] getMap(int ind) {
+        return maps[ind];
+    }
 
     public void printMap(int[][] map) {
         System.out.print(" ");
@@ -25,42 +34,6 @@ public class Maps {
             }
             System.out.println();
         }
-    }
-
-    public int[][] getMap1() {
-        return map1;
-    }
-
-    public int[][] getMap2() {
-        return map2;
-    }
-
-    public int[][] getMap3() {
-        return map3;
-    }
-
-    public int[][] getMap4() {
-        return map4;
-    }
-
-    public int[][] getMap5() {
-        return map5;
-    }
-
-    public int[][] getMap6() {
-        return map6;
-    }
-
-    public int[][] getMap7() {
-        return map7;
-    }
-
-    public int[][] getMap8() {
-        return map8;
-    }
-
-    public int[][] getMap9() {
-        return map9;
     }
 
     private int[][] map1 = new int [][] {
